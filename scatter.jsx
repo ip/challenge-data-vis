@@ -22,17 +22,12 @@ module.exports = class Scatter extends React.Component {
     const { width, height } = this.props
     const { flowers, selectedFlower } = this.state
 
-    const minPetalWidth = reduceMinProperty(flowers, 'petalWidth')
-    const maxPetalWidth = reduceMaxProperty(flowers, 'petalWidth')
-    const minPetalLength = reduceMinProperty(flowers, 'petalLength')
-    const maxPetalLength = reduceMaxProperty(flowers, 'petalLength')
-
     const style = { width, height }
     const flowerElems = flowers.map(
       (flower, i) => <Flower
         key={ i }
         { ...flower }
-        { ...{ minPetalWidth, maxPetalWidth, minPetalLength, maxPetalLength } }
+        petalRange={ calculatePetalRange(flowers) }
         containerWidth={ width }
         containerHeight={ height }
         mouseEvents={ this.createFlowerMouseEvents(i) } />
@@ -84,3 +79,10 @@ const reduceProperty = (iteratee, initialValue) => (array, property) =>
 
 const reduceMinProperty = reduceProperty(Math.min, +Infinity)
 const reduceMaxProperty = reduceProperty(Math.max, -Infinity)
+
+const calculatePetalRange = flowers => ({
+  minWidth: reduceMinProperty(flowers, 'petalWidth'),
+  maxWidth: reduceMaxProperty(flowers, 'petalWidth'),
+  minLength: reduceMinProperty(flowers, 'petalLength'),
+  maxLength: reduceMaxProperty(flowers, 'petalLength')
+})

@@ -2,14 +2,14 @@ const React = require('React')
 const linmap = require('linmap')
 
 module.exports = function Flower(props) {
-  const { sepalLength, sepalWidth, petalLength, petalWidth, species,
-    minPetalWidth, maxPetalWidth, minPetalLength, maxPetalLength,
+  const { petalLength, petalWidth, species, petalRange,
     containerWidth, containerHeight, mouseEvents } = props
 
   const style = {
-    left: linmap(minPetalWidth, maxPetalWidth, 0, containerWidth, petalWidth),
-    bottom: linmap(minPetalLength, maxPetalLength, 0, containerHeight,
-      petalLength),
+    left: linmap(petalRange.minWidth, petalRange.maxWidth, 0, containerWidth,
+      petalWidth),
+    bottom: linmap(petalRange.minLength, petalRange.maxLength, 0,
+      containerHeight, petalLength),
     background: colorMap[species]
   }
 
