@@ -1,6 +1,7 @@
 const React = require('React')
-const linmap = require('linmap')
 const jsonist = require('jsonist')
+
+const Flower = require('./flower.jsx')
 
 module.exports = class Scatter extends React.Component {
   constructor (props) {
@@ -49,20 +50,6 @@ module.exports = class Scatter extends React.Component {
       this.setState({ flowers })
     })
   }
-}
-
-function Flower(props) {
-  const { sepalLength, sepalWidth, petalLength, petalWidth, species,
-    minPetalWidth, maxPetalWidth, minPetalLength, maxPetalLength,
-    containerWidth, containerHeight } = props
-
-  const style = {
-    left: linmap(minPetalWidth, maxPetalWidth, 0, containerWidth, petalWidth),
-    bottom: linmap(minPetalLength, maxPetalLength, 0, containerHeight,
-      petalLength)
-  }
-
-  return <div className='flower' { ...{ style } }>x</div>
 }
 
 const reduceProperty = (iteratee, initialValue) => (array, property) =>
