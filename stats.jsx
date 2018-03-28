@@ -14,8 +14,18 @@ module.exports = function Stats(props) {
   )
 }
 
-const formatInfo = info => Object.keys(info).map(
-  (key, i) => (
-    <div key={ i }>{ key }: { info[key] }</div>  
-  )
+const formatInfo = info => (
+  <table cols='2' rows={ info.length }>
+    <tbody>
+    {
+      Object.keys(info).map(
+        (key, i) => (
+          <tr key={ i }>
+            <td>{ key }:</td><td>{ info[key] }</td>
+          </tr>
+        )
+      )
+    }
+    </tbody>
+  </table>
 )
