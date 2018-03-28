@@ -11,10 +11,15 @@
   transform: translate(-50%, 50%);
 }
 
+.flower:hover {
+  border: 2px solid white;
+  z-index: 10;
+}
+
 .stats {
   color: #fffb;
   position: absolute;
-  z-index: 1;
+  z-index: 20;
   pointer-events: none;
   left: 1em;
   top: 1em;
