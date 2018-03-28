@@ -9,8 +9,15 @@ module.exports = function Flower(props) {
   const style = {
     left: linmap(minPetalWidth, maxPetalWidth, 0, containerWidth, petalWidth),
     bottom: linmap(minPetalLength, maxPetalLength, 0, containerHeight,
-      petalLength)
+      petalLength),
+    background: colorMap[species]
   }
 
-  return <div className='flower' { ...{ style } }>x</div>
+  return <div className='flower' { ...{ style } } />
+}
+
+const colorMap = {
+  virginica: 'blue',
+  versicolor: 'green',
+  setosa: 'orange'
 }
