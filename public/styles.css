@@ -1,0 +1,17 @@
+.scatter {
+  background: #0004;
+  position: relative;
+}
+
+.info {
+  position: fixed;
+  left: 2em;
+  top: 2em;
+}
+
+.flower {
+  position: absolute;
+  background: white;
+  width: 1em;
+  height: 1em;
+}
