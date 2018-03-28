@@ -4,7 +4,7 @@ const linmap = require('linmap')
 module.exports = function Flower(props) {
   const { sepalLength, sepalWidth, petalLength, petalWidth, species,
     minPetalWidth, maxPetalWidth, minPetalLength, maxPetalLength,
-    containerWidth, containerHeight } = props
+    containerWidth, containerHeight, mouseEvents } = props
 
   const style = {
     left: linmap(minPetalWidth, maxPetalWidth, 0, containerWidth, petalWidth),
@@ -13,7 +13,7 @@ module.exports = function Flower(props) {
     background: colorMap[species]
   }
 
-  return <div className='flower' { ...{ style } } />
+  return <div className='flower' { ...{ style } } { ...mouseEvents } />
 }
 
 const colorMap = {

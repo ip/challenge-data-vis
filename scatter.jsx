@@ -2,13 +2,15 @@ const React = require('React')
 const jsonist = require('jsonist')
 
 const Flower = require('./flower.jsx')
+const Stats = require('./stats.jsx')
 
 module.exports = class Scatter extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      flowers: []
+      flowers: [],
+      selectedFlower: -1
     }
   }
 
@@ -18,7 +20,7 @@ module.exports = class Scatter extends React.Component {
 
   render () {
     const { width, height } = this.props
-    const { flowers } = this.state
+    const { flowers, selectedFlower } = this.state
 
     const minPetalWidth = reduceMinProperty(flowers, 'petalWidth')
     const maxPetalWidth = reduceMaxProperty(flowers, 'petalWidth')
@@ -32,11 +34,13 @@ module.exports = class Scatter extends React.Component {
         { ...flower }
         { ...{ minPetalWidth, maxPetalWidth, minPetalLength, maxPetalLength } }
         containerWidth={ width }
-        containerHeight={ height } />
+        containerHeight={ height }
+        mouseEvents={ this.createFlowerMouseEvents(i) } />
     )
 
     return (
       <div { ...{ style } } className='scatter'>
+        <Stats info={ this.makeStatsInfo(selectedFlower) } />
         { flowerElems }
       </div>
     )
@@ -49,6 +53,23 @@ module.exports = class Scatter extends React.Component {
 
       this.setState({ flowers })
     })
+  }
+
+  createFlowerMouseEvents (i) {
+    return {
+      onMouseOver: () => this.setState({ selectedFlower: i }),
+      onMouseOut: () => this.setState({ selectedFlower: -1 })
+    }
+  }
+
+  makeStatsInfo (selectedFlower) {
+    if (selectedFlower === -1) return null
+
+    return Object.assign(
+      {},
+      { index: selectedFlower },
+      this.state.flowers[selectedFlower]
+    )
   }
 }
 
