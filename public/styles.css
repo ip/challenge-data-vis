@@ -13,4 +13,6 @@
   position: absolute;
   width: 0.75em;
   height: 0.75em;
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
 }
